@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://drh163cigw8sd"]
+
+[node name="CPUArea" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CPUBooksLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="CPUHandContainer" type="HBoxContainer" parent="."]
+layout_mode = 2

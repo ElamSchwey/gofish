@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://sup8mu1jtv83"]
+
+[node name="PlayerArea" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerBooksLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="PlayerHandContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RankOption" type="OptionButton" parent="."]
+layout_mode = 2
+
+[node name="AskButton" type="Button" parent="."]
+layout_mode = 2
+text = "Ask for Cards"

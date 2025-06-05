@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://la4gco2o30og"]
+
+[node name="GameLog" type="ScrollContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameLogText" type="RichTextLabel" parent="."]
+layout_mode = 2
