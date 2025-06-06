@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci6goku6jng0n"]
+
+[ext_resource type="Script" uid="uid://nh2mblbc150m" path="res://scripts/carddisplay.gd" id="1_b4d4n"]
+[ext_resource type="Texture2D" uid="uid://uoqrmbwfm71u" path="res://art/Deck/01S.png" id="2_ajynf"]
+
+[node name="CardDisplay" type="Control"]
+custom_minimum_size = Vector2(48, 68)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_b4d4n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 68)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ajynf")
+stretch_mode = 5
+script = ExtResource("1_b4d4n")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_color = Color(0.901961, 0.827451, 0.482353, 1)
+flat = true

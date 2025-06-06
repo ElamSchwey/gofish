@@ -7,17 +7,29 @@
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_jyhfs")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CPUArea" parent="VBoxContainer" instance=ExtResource("2_tbgi4")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="DeckArea" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="DeckContainer" type="HBoxContainer" parent="VBoxContainer/DeckArea"]
 layout_mode = 2
 
 [node name="GameLog" parent="VBoxContainer" instance=ExtResource("3_tefeu")]
@@ -25,3 +37,4 @@ layout_mode = 2
 
 [node name="PlayerArea" parent="VBoxContainer" instance=ExtResource("4_o6xl0")]
 layout_mode = 2
+size_flags_vertical = 8
