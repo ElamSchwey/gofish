@@ -12,6 +12,7 @@ var player_books = []
 var cpu_books = []
 var current_turn = "player"  # "player" or "cpu"
 var game_over = false
+var waiting_for_draw = false  # Track if player should draw from deck
 
 # UI nodes
 @onready var player_hand_container = $VBoxContainer/PlayerArea/PlayerHandContainer
@@ -64,6 +65,7 @@ func start_new_game():
 	# Reset game state
 	current_turn = "player"
 	game_over = false
+	waiting_for_draw = false
 	
 	update_ui()
 	log_message("Game started! You have " + str(player_hand.size()) + " cards.")
@@ -153,7 +155,10 @@ func get_available_ranks(hand):
 
 func _on_player_card_clicked(card_display: CardDisplay):
 	print("PLAYER TURN: Clicked card - ", rank_name(card_display.card_data.rank), " of ", suit_name(card_display.card_data.suit))
-	if current_turn != "player" or game_over:
+	if current_turn != "player" or game_over or waiting_for_draw:
+		if waiting_for_draw:
+			print("PLAYER TURN: Cannot ask for ranks - must draw from deck first!")
+			log_message("You must draw from the deck first!")
 		return
 	
 	# Ask for the rank of the clicked card
@@ -186,12 +191,15 @@ func suit_name(suit):
 		Card.Suit.SPADES: return "Spades"
 
 func _on_deck_card_clicked(card_display: CardDisplay):
-	if current_turn == "player":
+	if current_turn == "player" and waiting_for_draw:
 		print("PLAYER TURN: Clicked deck card to draw")
-		# Only allow drawing when player needs to "go fish"
 		draw_from_deck()
+	elif current_turn == "player" and not waiting_for_draw:
+		print("PLAYER TURN: Cannot draw yet - ask for a rank first!")
+		log_message("Ask for a rank first by clicking one of your cards!")
 
 func draw_from_deck():
+	waiting_for_draw = false
 	if deck.is_empty():
 		log_message("Deck is empty! Turn passes to CPU.")
 		current_turn = "cpu"
@@ -244,7 +252,8 @@ func player_ask_for_rank(rank):
 		# Check for new books
 		check_and_remove_books(player_hand, player_books)
 		
-		# Player continues turn
+		# Player continues turn (can ask again)
+		waiting_for_draw = false
 		update_ui()
 		if check_game_over():
 			return
@@ -257,8 +266,8 @@ func player_ask_for_rank(rank):
 func go_fish_player():
 	print("PLAYER TURN: Go fish! Click a card from the deck to draw")
 	log_message("CPU says: 'Go Fish!' Click a card from the deck to draw.")
+	waiting_for_draw = true
 	# Player must now click a deck card to continue
-	# The actual drawing happens in draw_from_deck() when they click
 
 func cpu_turn():
 	print("CPU TURN: Starting - CPU has ", cpu_hand.size(), " cards")
